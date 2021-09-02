@@ -27,14 +27,14 @@ public class HeapSort {
         }
 
         //turn arr into heap
-        for (int i = 0; i < arr.length; i++) {
-            heapInsert(arr, i);
+        for (int i = 0; i < arr.length; i++) { //O(N)
+            heapInsert(arr, i);//O(logN)
         }
         int heapSize = arr.length;
         swap(arr, 0, --heapSize);
-        while (heapSize > 0) {
-            heapify(arr, 0, heapSize);
-            swap(arr, 0, --heapSize);
+        while (heapSize > 0) {//O(N)
+            heapify(arr, 0, heapSize);//O(logN)
+            swap(arr, 0, --heapSize);//O(1)
         }
 
     }
