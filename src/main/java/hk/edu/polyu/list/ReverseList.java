@@ -39,20 +39,52 @@ public class ReverseList {
 //        return res;
 //    }
 
+    //iteration
+//    public ListNode reverseList(ListNode head) {
+//
+//        ListNode pre = null;
+//
+//        while (head != null) {
+//            ListNode temp = pre;
+//            pre = head;
+//            head = head.next;
+//            pre.next = temp;
+//        }
+//
+//        return pre;
+//    }
+
+    //recursion
+
+    public ListNode recurseHead;
+
     public ListNode reverseList(ListNode head) {
-
-        ListNode pre = null;
-
-        while (head != null) {
-            ListNode temp = pre;
-            pre = head;
-            head = head.next;
-            pre.next = temp;
-        }
-
-        return pre;
+        reverse(head);
+        System.out.println();
+        return null;
     }
 
+    public ListNode reverse(ListNode head) {
+
+        if (head == null ) {
+            return head;
+        }
+
+        //this is the head of reversed list
+        if (head.next == null) {
+            recurseHead = head;
+        }
+
+
+        ListNode tail = reverse(head.next);
+        head.next = null;
+        if (tail == null) {
+            return head;
+        }
+        tail.next = head;
+
+        return head;
+    }
 
 
     public static void main(String[] args) {
@@ -63,5 +95,6 @@ public class ReverseList {
         head.next.next.next.next = new ListNode(5);
         ReverseList reverseList = new ReverseList();
         reverseList.reverseList(head);
+        System.out.println(reverseList.recurseHead);
     }
 }
