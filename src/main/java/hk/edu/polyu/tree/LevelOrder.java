@@ -21,31 +21,26 @@ public class LevelOrder {
             return res;
         }
 
-        TreeNode lastNode = (root.left == null && root.right == null) ? null : (root.right != null) ? root.right : root.left;
         Queue<TreeNode> queue = new LinkedList<>();
         queue.offer(root);
-
         List<Integer> currIntegers = new ArrayList<>();
 
         while (!queue.isEmpty()) {
-            TreeNode curr = queue.poll();
-            currIntegers.add(curr.val);
+            int len = queue.size();
+            for (int i = 0; i < len; i++) {
+                TreeNode curr = queue.poll();
+                currIntegers.add(curr.val);
+                if (curr.left != null) {
+                    queue.offer(curr.left);
+                }
 
-            if (root.left == lastNode || root.right == lastNode) {
-                res.add(currIntegers);
-                currIntegers = new ArrayList<>();
+                if (curr.right != null) {
+                    queue.offer(curr.right);
+                }
             }
 
-            if (curr.left != null) {
-                queue.offer(curr.left);
-                lastNode = curr.left;
-            }
-
-            if (curr.right != null) {
-                queue.offer(curr.right);
-                lastNode = curr.right;
-            }
-
+            res.add(currIntegers);
+            currIntegers = new ArrayList<>();
         }
 
         return res;

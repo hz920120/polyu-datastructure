@@ -9,7 +9,7 @@ import java.util.Stack;
 /**
  * @author HUANG Zuo
  * @version create_time：2021-09-06 13:10:41
- * @declaration
+ * @declaration 先序遍历
  * @e-mail hz920120@gmail.com
  */
 public class PreorderTraversal {
