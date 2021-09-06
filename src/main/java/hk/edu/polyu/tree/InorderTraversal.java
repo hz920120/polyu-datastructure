@@ -8,44 +8,45 @@ import java.util.Stack;
 
 /**
  * @author HUANG Zuo
- * @version create_time：2021-09-06 13:10:41
+ * @version create_time：2021-09-06 13:40:50
  * @declaration
  * @e-mail hz920120@gmail.com
  */
-public class PreorderTraversal {
-
-    public List<Integer> preorderTraversal(TreeNode root) {
+public class InorderTraversal {
+    public List<Integer> inorderTraversal(TreeNode root) {
         List<Integer> res = new ArrayList<>();
         if (root == null) {
             return res;
         }
+
         Stack<TreeNode> stack = new Stack<>();
-        stack.push(root);
+
+        addLeft(root, stack);
+
 
         while (!stack.isEmpty()) {
             TreeNode curr = stack.pop();
             res.add(curr.val);
 
-            //right
             if (curr.right != null) {
-                stack.add(curr.right);
+                addLeft(curr.right, stack);
             }
-
-            //left
-            if (curr.left != null) {
-                stack.add(curr.left);
-            }
-
         }
-
         return res;
     }
 
-    public static void main(String[] args) {
-        PreorderTraversal preorderTraversal = new PreorderTraversal();
-        TreeNode treeNode = TreeNode.mkTree("[1,2,3,4,5,6,7]");
-        preorderTraversal.preorderTraversal(treeNode);
-        System.out.println(1);
+    private void addLeft(TreeNode nodes, Stack<TreeNode> stack) {
+        TreeNode left = nodes;
+        while (left != null) {
+            stack.add(left);
+            left = left.left;
+        }
     }
 
+    public static void main(String[] args) {
+        InorderTraversal inorderTraversal = new InorderTraversal();
+        TreeNode treeNode = TreeNode.mkTree("[1,2,3,4,5,6,7]");
+        inorderTraversal.inorderTraversal(treeNode);
+        System.out.println(1);
+    }
 }
