@@ -14,37 +14,56 @@ import java.util.Stack;
  */
 public class PreorderTraversal {
 
+//    public List<Integer> preorderTraversal(TreeNode root) {
+//        List<Integer> res = new ArrayList<>();
+//        if (root == null) {
+//            return res;
+//        }
+//        Stack<TreeNode> stack = new Stack<>();
+//        stack.push(root);
+//
+//        while (!stack.isEmpty()) {
+//            TreeNode curr = stack.pop();
+//            res.add(curr.val);
+//
+//            //right
+//            if (curr.right != null) {
+//                stack.add(curr.right);
+//            }
+//
+//            //left
+//            if (curr.left != null) {
+//                stack.add(curr.left);
+//            }
+//
+//        }
+//
+//        return res;
+//    }
+
     public List<Integer> preorderTraversal(TreeNode root) {
         List<Integer> res = new ArrayList<>();
         if (root == null) {
             return res;
         }
-        Stack<TreeNode> stack = new Stack<>();
-        stack.push(root);
+        process(root, res);
+        return res;
+    }
 
-        while (!stack.isEmpty()) {
-            TreeNode curr = stack.pop();
-            res.add(curr.val);
-
-            //right
-            if (curr.right != null) {
-                stack.add(curr.right);
-            }
-
-            //left
-            if (curr.left != null) {
-                stack.add(curr.left);
-            }
-
+    private void process(TreeNode treeNode, List<Integer> res) {
+        if (treeNode == null) {
+            return;
         }
 
-        return res;
+        res.add(treeNode.val);
+        process(treeNode.left,res);
+        process(treeNode.right,res);
     }
 
     public static void main(String[] args) {
         PreorderTraversal preorderTraversal = new PreorderTraversal();
         TreeNode treeNode = TreeNode.mkTree("[1,2,3,4,5,6,7]");
-        preorderTraversal.preorderTraversal(treeNode);
+        List<Integer>  res = preorderTraversal.preorderTraversal(treeNode);
         System.out.println(1);
     }
 
