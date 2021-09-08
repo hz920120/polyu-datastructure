@@ -13,40 +13,58 @@ import java.util.Stack;
  * @e-mail hz920120@gmail.com
  */
 public class InorderTraversal {
+//    public List<Integer> inorderTraversal(TreeNode root) {
+//        List<Integer> res = new ArrayList<>();
+//        if (root == null) {
+//            return res;
+//        }
+//
+//        Stack<TreeNode> stack = new Stack<>();
+//
+//        addLeft(root, stack);
+//
+//
+//        while (!stack.isEmpty()) {
+//            TreeNode curr = stack.pop();
+//            res.add(curr.val);
+//
+//            if (curr.right != null) {
+//                addLeft(curr.right, stack);
+//            }
+//        }
+//        return res;
+//    }
+//
+//    private void addLeft(TreeNode nodes, Stack<TreeNode> stack) {
+//        TreeNode left = nodes;
+//        while (left != null) {
+//            stack.add(left);
+//            left = left.left;
+//        }
+//    }
+
     public List<Integer> inorderTraversal(TreeNode root) {
         List<Integer> res = new ArrayList<>();
         if (root == null) {
             return res;
         }
-
-        Stack<TreeNode> stack = new Stack<>();
-
-        addLeft(root, stack);
-
-
-        while (!stack.isEmpty()) {
-            TreeNode curr = stack.pop();
-            res.add(curr.val);
-
-            if (curr.right != null) {
-                addLeft(curr.right, stack);
-            }
-        }
+        process(root, res);
         return res;
     }
 
-    private void addLeft(TreeNode nodes, Stack<TreeNode> stack) {
-        TreeNode left = nodes;
-        while (left != null) {
-            stack.add(left);
-            left = left.left;
+    private void process(TreeNode treeNode, List<Integer> res){
+        if (treeNode == null) {
+            return;
         }
+        process(treeNode.left, res);
+        res.add(treeNode.val);
+        process(treeNode.right, res);
     }
 
     public static void main(String[] args) {
         InorderTraversal inorderTraversal = new InorderTraversal();
         TreeNode treeNode = TreeNode.mkTree("[1,2,3,4,5,6,7]");
-        inorderTraversal.inorderTraversal(treeNode);
+        List<Integer> res = inorderTraversal.inorderTraversal(treeNode);
         System.out.println(1);
     }
 }
