@@ -13,9 +13,9 @@ import java.util.HashSet;
  */
 public class Graph {
 
-    HashMap<Integer, Node> nodes;
+    public HashMap<Integer, Node> nodes;
 
-    HashSet<Edge> edges;
+    public HashSet<Edge> edges;
 
     public Graph() {
         this.nodes = new HashMap<>();

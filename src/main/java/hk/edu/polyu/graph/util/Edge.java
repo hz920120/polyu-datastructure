@@ -8,11 +8,11 @@ package hk.edu.polyu.graph.util;
  */
 public class Edge {
 
-    int w;
+    public int w;
 
-    Node from;
+    public Node from;
 
-    Node to;
+    public Node to;
 
     public Edge(int w, Node from, Node to) {
         this.w = w;

@@ -10,15 +10,15 @@ import java.util.ArrayList;
  */
 public class Node {
 
-    int val;
+    public int val;
 
-    int in;
+    public int in;
 
-    int out;
+    public int out;
 
-    ArrayList<Node> nexts;
+    public ArrayList<Node> nexts;
 
-    ArrayList<Edge> edges;
+    public ArrayList<Edge> edges;
 
     public Node(int val) {
         this.val = val;
