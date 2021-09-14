@@ -10,16 +10,12 @@ public class QuickSort3A {
 
     public static void qs3 (int[] arr, int L, int R) {
         if (L < R) {
-            if (R - L < 2) {
-                swap(arr, L, R);
-            } else {
-                int ranIndex = L + (int) (Math.random() * (R - L + 1));
-                swap(arr, ranIndex, R);
+            int ranIndex = L + (int) (Math.random() * (R - L + 1));
+            swap(arr, ranIndex, R);
 
-                int[] res = partition(arr, L, R);
-                qs3(arr, L, res[0] - 1);
-                qs3(arr, res[1] + 1, R);
-            }
+            int[] res = partition(arr, L, R);
+            qs3(arr, L, res[0] - 1);
+            qs3(arr, res[1] + 1, R);
         }
     }
 
@@ -28,19 +24,22 @@ public class QuickSort3A {
      */
     private static int[] partition(int[] arr, int L, int R) {
 
-        int P = L;
-        int right = R;
-        int stan = arr[right];
-        while (P < R) {
-            if (arr[P] > stan) {
-                swap(arr, P,  --R);
-            } else if (arr[P] < stan) {
-                swap(arr, P++, L++);
-            } else {
-                P++;
+        int small = L - 1;
+        int std = arr[R];
+        int last = R;
+
+        while (L < R) {
+            if (arr[L] < std) {
+                swap(arr, ++small, L++);
+            }
+            else if (arr[L] > std) {
+                swap(arr, L, --R);
+            }
+            else {
+                L++;
             }
         }
-        swap(arr, right, R);
+        swap(arr, R, last);
         return new int[] {L, R};
     }
 
