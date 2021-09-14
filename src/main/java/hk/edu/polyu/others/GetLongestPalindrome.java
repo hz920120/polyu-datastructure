@@ -15,52 +15,35 @@ public class GetLongestPalindrome {
             return 0;
         }
 
-        String reverse = new StringBuilder(A).reverse().toString();
-
-        Stack<Character> stack = new Stack<>();
-        LinkedList<Character> list = new LinkedList<>();
-
-        //正序
-        char[] pos = A.toCharArray();
-        //倒序
-        char[] neg = reverse.toCharArray();
-
-        for (char c : pos) {
-            list.offer(c);
-        }
-
-        for (char c : neg) {
-            stack.push(c);
-        }
+        char[] chars = A.toCharArray();
 
         int res = 0;
-
-        for (int i = 0; i < list.size(); i++) {
-            if (res >= list.size() - i) {
-                return res;
-            }
-
-            Stack<Character> s = new Stack<>();
-            s.addAll(stack);
-            LinkedList<Character> l = new LinkedList<>(list);
-
-            for (int j = 0; j < i; j++) {
-                s.pop();
-            }
-
-            int temp = 0;
-            while (!s.isEmpty()) {
-                char schar = s.pop();
-                char lchar = l.pollLast();
-                if (schar == lchar) {
-                    res = Math.max(++temp, res);
-                } else {
-                    temp = 0;
-                }
-            }
+        for (int i = 0; i < chars.length; i++) {
+            res = Math.max(1 + findCenter(chars, i ,1), findSides(chars, i - 1, i + 1));
         }
 
         return res;
+    }
+
+    public int findCenter(char[] chars, int index, int d) {
+        if (index - d < 0 || index + d > chars.length - 1) {
+            return 0;
+        }
+        if (chars[index - d] == chars[index + d]) {
+            return 2 + findCenter(chars, index, d + 1);
+        }
+        return 0;
+    }
+
+    public int findSides(char[] chars, int left, int right) {
+        if (left < 0 || right > chars.length - 1) {
+            return 0;
+        }
+
+        if (chars[left] == chars[right]) {
+            return 2 + findSides(chars, left, chars.length - left);
+        }
+        return 0;
     }
 
     public static void main(String[] args) {
